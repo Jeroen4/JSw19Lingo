@@ -496,7 +496,7 @@ var gameloop = function(){
   
   var pressn = 1; // turn number
   
-  // get all indexes of a given value in an array
+  // get all indexes of a given value 
   var getAllIndexes = function(arr, val) {
     var indexes = [], i;
     for(i = 0; i < arr.length; i++)
@@ -522,7 +522,7 @@ var gameloop = function(){
       // If not right number of letters
       if(guess.length !== 5){
         document.getElementById('smallMsg').innerHTML = "Guesses must be 5 letters!";
-        if(pressn===5){
+        if(pressn === 5){
           end("Sorry, you lost.", "Correct word: " + rand);
         }
         pressn++;
@@ -548,7 +548,7 @@ var gameloop = function(){
           else if(hasDuplicates === true){
             var ind = getAllIndexes(rand, guess[i]);
             if (ind.length > 1){
-              for (var j=0; j<ind.length;j++){
+              for (var j=0; j<ind.length; j++){
                 if(childDivs[ind[j]].className != "square correct" && childDivs[i].className != "square wrongplace"){
                   changeClass(childDivs[i], 'default', 'wrongplace');
                 } //if
@@ -562,7 +562,7 @@ var gameloop = function(){
         
         input.value = ""; // clear input box
         
-        if(c===5) { // if they have all the correct letters
+        if(c === 5) { // if they have all the correct letters
           end("Congrats, you won!", "Play Again?");
         } //if
         else if (pressn === 5){ // if they're out of tries
@@ -590,7 +590,7 @@ var playagain = function(){
   changeClass(button, "visible", "invisible");
   
   // clean boxes
-  for(var i=1;i<6;i++){
+  for(var i=1; i<6; i++){
     var resets = document.getElementById('row'+i).getElementsByTagName('div');
     for(var j=0;j<5;j++){
       resets[j].innerHTML="";
