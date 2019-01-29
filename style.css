@@ -3,21 +3,22 @@ body{
   margin: 0 auto;
   margin-top: 20px;
 }
+.tblBody{
+  background-color: #000066;
+}
 .input{
   width: 85px;
-  position: relative;
-  left: 120px;
-  top: 25px;
+  margin-top: 25px;
 }
 .submit{
   width: 85px;
-  position: relative;
-  left: 130px;
-  top: 25px;
+  margin-top: 25px;
+  margin-left: 10px;
 }
 .titel {
   text-align: center;
 }
-.MSG{
+.msg{
   text-align: center;
+  font-size: 14px;
 }
