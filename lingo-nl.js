@@ -478,32 +478,34 @@ var words = [
 	"ZEKER",
 	"ZEVEN",
 	"ZEEEN"
-]; // woorden lijst
+];
 
 var word = words[Math.floor(Math.random() * words.length)];
-/*console.log(word);*/
+var hasDuplicates = (/([a-zA-Z]).*?\1/).test(word);
 
+for (var i = 0; i < word.length; i++) {
+    console.log(word.charAt(i));				//splits the word in seperate characters
+}
 
 var h1 = document.createElement('h1');
 h1.innerHTML = "LINGO";
 h1.className = "titel";
 var h3 = document.createElement('h3');
-h3.innerHTML = "Groen is juist, Geel is foute plek";
-h3.className = "MSG";
-
+h3.innerHTML = "GREEN = CORRECT || YELLOW = WRONG PLACE";
+h3.className = "msg";
 document.body.appendChild(h1);
 document.body.appendChild(h3);
 
 
-var body = document.getElementsByTagName("body")[0];
 
-  // creates a <table> element and a <tbody> element
+var body = document.getElementsByTagName("body")[0];
+body.className = "container";
+
   var tbl = document.createElement("table");
   var tblBody = document.createElement("tbody");
+  tblBody.className = "tblBody";
 
-  // creating all cells
   for (var i = 1; i < 6; i++) {
-    // creates a table row
     var row = document.createElement("tr");
 
     for (var j = 1; j < 6; j++) {
@@ -518,6 +520,7 @@ var body = document.getElementsByTagName("body")[0];
   tbl.appendChild(tblBody);
   body.appendChild(tbl);
   tbl.setAttribute("border", "1");
+
 
 var input = document.createElement("input");
 input.type = "text";
