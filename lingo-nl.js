@@ -479,6 +479,7 @@ var words = [
 	"ZEVEN",
 	"ZEEEN"
 ];
+<<<<<<< HEAD
 
 var activeRow = 1;
 
@@ -487,6 +488,15 @@ var chars = word.split("");
 var hasDuplicates = (/([a-zA-Z]).*?\1/).test(word);
 
 /*console.log(chars);*/
+=======
+
+var word = words[Math.floor(Math.random() * words.length)];
+var hasDuplicates = (/([a-zA-Z]).*?\1/).test(word);
+
+for (var i = 0; i < word.length; i++) {
+    console.log(word.charAt(i));				//splits the word in seperate characters
+}
+>>>>>>> master
 
 var h1 = document.createElement('h1');
 h1.innerHTML = "LINGO";
@@ -497,6 +507,11 @@ h3.className = "msg";
 document.body.appendChild(h1);
 document.body.appendChild(h3);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
 var body = document.getElementsByTagName("body")[0];
 body.className = "container";
 
@@ -522,7 +537,10 @@ body.className = "container";
   body.appendChild(tbl);
   tbl.setAttribute("border", "1");
 
+<<<<<<< HEAD
 document.getElementById("row1c0").innerHTML=chars[0];
+=======
+>>>>>>> master
 
 var input = document.createElement("input");
 input.type = "text";
@@ -530,6 +548,7 @@ input.className = "guess";
 input.setAttribute('placeholder', 'voer je antwoord in');
 body.appendChild(input); 
 
+<<<<<<< HEAD
  input.onkeypress = function(event) {			//guess event
     if (event.key == "Enter" || event.keyCode == 13) {
     	var guess = input.value.toLowerCase();
@@ -581,3 +600,9 @@ for (var i = 0; i < 5; i++) {
             }
           }
        }
+=======
+var sub = document.createElement("input");
+sub.setAttribute("type", "submit");
+sub.className = "submit";
+body.appendChild(sub);
+>>>>>>> master

@@ -6,11 +6,18 @@ body{
   
 }
 .tblBody{
+<<<<<<< HEAD
   background-color: lightgrey;
   font-size: 30px;
 }
 .guess{
   width: 200px;
+=======
+  background-color: #000066;
+}
+.input{
+  width: 85px;
+>>>>>>> master
   margin-top: 25px;
 }
 .submit{
