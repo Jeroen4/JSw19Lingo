@@ -2,12 +2,15 @@ body{
   width: 420px;
   margin: 0 auto;
   margin-top: 20px;
+  background-color: white;
+  
 }
 .tblBody{
-  background-color: #000066;
+  background-color: lightgrey;
+  font-size: 30px;
 }
-.input{
-  width: 85px;
+.guess{
+  width: 200px;
   margin-top: 25px;
 }
 .submit{

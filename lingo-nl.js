@@ -480,12 +480,13 @@ var words = [
 	"ZEEEN"
 ];
 
+var activeRow = 1;
+
 var word = words[Math.floor(Math.random() * words.length)];
+var chars = word.split("");
 var hasDuplicates = (/([a-zA-Z]).*?\1/).test(word);
 
-for (var i = 0; i < word.length; i++) {
-    console.log(word.charAt(i));				//splits the word in seperate characters
-}
+/*console.log(chars);*/
 
 var h1 = document.createElement('h1');
 h1.innerHTML = "LINGO";
@@ -496,8 +497,6 @@ h3.className = "msg";
 document.body.appendChild(h1);
 document.body.appendChild(h3);
 
-
-
 var body = document.getElementsByTagName("body")[0];
 body.className = "container";
 
@@ -507,10 +506,12 @@ body.className = "container";
 
   for (var i = 1; i < 6; i++) {
     var row = document.createElement("tr");
+    row.id = "row" + i;
 
-    for (var j = 1; j < 6; j++) {
+
+    for (var j = 0; j < 5; j++) {
       var cell = document.createElement("td");
-      cell.id = "r" + i + "c" + j;
+      cell.id = row.id + "c" + j;
       row.appendChild(cell);
       cell.style.padding = "40px";
     }
@@ -521,13 +522,62 @@ body.className = "container";
   body.appendChild(tbl);
   tbl.setAttribute("border", "1");
 
+document.getElementById("row1c0").innerHTML=chars[0];
 
 var input = document.createElement("input");
 input.type = "text";
-input.className = "input";
+input.className = "guess";
+input.setAttribute('placeholder', 'voer je antwoord in');
 body.appendChild(input); 
 
-var sub = document.createElement("input");
-sub.setAttribute("type", "submit");
-sub.className = "submit";
-body.appendChild(sub);
+ input.onkeypress = function(event) {			//guess event
+    if (event.key == "Enter" || event.keyCode == 13) {
+    	var guess = input.value.toLowerCase();
+    	var guessArr = guess.split("");
+    	var guessArrCopy = guess.split("");
+    	var charsCopy = chars;
+    	console.log(guessArrCopy + " copy");
+    	console.log(charsCopy + " copy");
+    }
+    for (var k = 0; k < guessArrCopy.length; k++) {
+    	    document.getElementById("row" + activeRow + "c" + k).innerHTML = guessArrCopy[k];
+    }
+    activeRow++;
+}
+
+for (var i = 0; i < 5; i++) {
+	document.getElementById("row" + activeRow + "c" + i).style.backgroundcolor = "red";
+
+	if (word == input) {
+           alert("you won");
+           location.reload();
+       }
+
+      else  if (activeRow > 5) {
+        alert("Sorry, you lost." + "Correct word: " + word);
+          location.reload();
+        }
+
+
+									// ------  check for colors and correct letters  ------ \\
+
+
+          for (var i = 0; i < 5; i++) {
+          document.getElementById("row"+(activeRow-1)+"c" + i).classList.add("red");
+
+          if (charsCopy[i] == guessArrCopy[i]) {
+          document.getElementById("row"+(activeRow-1)+"c" + i).style.backgroundColor = "green";
+            charsCopy[i]= null;
+            guessArrCopy[i] = null;
+          }
+          }
+          for (var i = 0; i < 5; i++) {
+            if ( guessArrCopy[i] != null) {
+              if (charsCopy.indexOf(guessArrCopy[i]) > -1) {
+                document.getElementById("row"+(activeRow-1)+"c" + i).classList.add("yellow");
+                charsCopy[charsCopy.indexOf(guessArrCopy[i])]= null;
+                guessArrCopy[i] = null;
+              }
+            }
+          }
+       }
