@@ -578,13 +578,11 @@ for (var i = 0; i < 5; i++) {
     }
     for(i = 0; i < 5; i++){
         if (guessArrCopy[i] != null) {
-            var position = charsCopy.indexOf(guessArrCopy[i]);
-            if (position > -1) {
                 document.getElementById("row" + (activeRow-1) + "c" + i).classList.add('yellow');
-                charsCopy[position] = null;
+                charsCopy[i] = null;
                 guessArrCopy[i] = null;
             }
         }
     }
 }
-}
+
