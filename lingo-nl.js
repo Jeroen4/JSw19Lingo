@@ -524,7 +524,8 @@ body.className = "container";
       var cell = document.createElement("td");
       cell.id = row.id + "c" + j;
       row.appendChild(cell);
-      cell.style.padding = "40px";
+      cell.style.width = "60px";
+      cell.style.height = "60px";
     }
     tblBody.appendChild(row);
   }
@@ -533,8 +534,7 @@ body.className = "container";
   body.appendChild(tbl);
   tbl.setAttribute("border", "1");
 
-document.getElementById("row1c0").innerHTML=chars[0];
-
+document.getElementById("row1c0").innerHTML=word[0];
 
 var input = document.createElement("input");
 input.type = "text";
@@ -544,52 +544,47 @@ body.appendChild(input);
 
  input.onkeypress = function(event) {			//guess event
     if (event.key == "Enter" || event.keyCode == 13) {
-    	var guess = input.value.toLowerCase();
+    	var guess = input.value.toUpperCase();
     	var guessArr = guess.split("");
     	var guessArrCopy = guess.split("");
-    	var charsCopy = chars;
+    	var charsCopy = word;
     	console.log(guessArrCopy + " copy");
     	console.log(charsCopy + " copy");
-    }
-    for (var k = 0; k < guessArrCopy.length; k++) {
+    	for (var k = 0; k < guessArrCopy.length; k++) {
     	    document.getElementById("row" + activeRow + "c" + k).innerHTML = guessArrCopy[k];
     }
     activeRow++;
-}
-
-for (var i = 0; i < 5; i++) {
-	document.getElementById("row" + activeRow + "c" + i).style.backgroundcolor = "red";
-
-	if (word == input) {
+    
+	if (word == guess) {
            alert("you won");
            location.reload();
-       }
+    }
 
-      else  if (activeRow > 5) {
-        alert("Sorry, you lost." + "Correct word: " + word);
-          location.reload();
-        }
+    else  if (activeRow > 5) {
+       	alert("Sorry, you lost." + "Correct word: " + word);
+        location.reload();
+    }
 
+	//check for colors and correct letters
 
-									// ------  check for colors and correct letters  ------ \\
-
-
-          for (var i = 0; i < 5; i++) {
-          document.getElementById("row"+(activeRow-1)+"c" + i).classList.add("red");
-
-          if (charsCopy[i] == guessArrCopy[i]) {
-          document.getElementById("row"+(activeRow-1)+"c" + i).style.backgroundColor = "green";
-            charsCopy[i]= null;
-            guessArrCopy[i] = null;
-          }
-          }
-          for (var i = 0; i < 5; i++) {
-            if ( guessArrCopy[i] != null) {
-              if (charsCopy.indexOf(guessArrCopy[i]) > -1) {
-                document.getElementById("row"+(activeRow-1)+"c" + i).classList.add("yellow");
-                charsCopy[charsCopy.indexOf(guessArrCopy[i])]= null;
+ 
+for (var i = 0; i < 5; i++) {
+	document.getElementById("row" + (activeRow-1) + "c" + i).classList.add("red");
+	    if (charsCopy[i] == guessArrCopy[i]) {
+	        document.getElementById("row"+(activeRow-1)+"c" + i).style.backgroundColor = "green";
+	        charsCopy[i]= null;
+	        guessArrCopy[i] = null;
+	    }
+    }
+    for(i = 0; i < 5; i++){
+        if (guessArrCopy[i] != null) {
+            var position = charsCopy.indexOf(guessArrCopy[i]);
+            if (position > -1) {
+                document.getElementById("row" + (activeRow-1) + "c" + i).classList.add('yellow');
+                charsCopy[position] = null;
                 guessArrCopy[i] = null;
-              }
             }
-          }
-       }
+        }
+    }
+}
+}

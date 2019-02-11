@@ -8,6 +8,7 @@ body{
 .tblBody{
   background-color: lightgrey;
   font-size: 30px;
+  text-align: center;
 }
 .guess{
   width: 200px;
@@ -16,15 +17,17 @@ body{
   width: 85px;
   margin-top: 25px;
 }
-.submit{
-  width: 85px;
-  margin-top: 25px;
-  margin-left: 10px;
-}
 .titel {
   text-align: center;
 }
 .msg{
   text-align: center;
   font-size: 14px;
+}
+.red{
+  background-color: red;
+}
+.yellow{
+  background-color: yellow;
+  border-radius: 25%;
 }
