@@ -483,26 +483,20 @@ var words = [
 
 var activeRow = 1;
 
-var word = words[Math.floor(Math.random() * words.length)];
-var chars = word.split("");
-var hasDuplicates = (/([a-zA-Z]).*?\1/).test(word);
 
-/*console.log(chars);*/
-
-
-var word = words[Math.floor(Math.random() * words.length)];
-var hasDuplicates = (/([a-zA-Z]).*?\1/).test(word);
+var word = words[Math.floor(Math.random() * words.length)];			//picks a random word from wordlist
+var chars = word.split("");                         				//spilts the word in seperate characters
+var hasDuplicates = (/([a-zA-Z]).*?\1/).test(word);					//check word for duplicates
 
 for (var i = 0; i < word.length; i++) {
     console.log(word.charAt(i));				//splits the word in seperate characters
 }
 
-
 var h1 = document.createElement('h1');
 h1.innerHTML = "LINGO";
 h1.className = "titel";
 var h3 = document.createElement('h3');
-h3.innerHTML = "GREEN = CORRECT || YELLOW = WRONG PLACE";
+h3.innerHTML = "GREEN = CORRECT || YELLOW = WRONG PLACE";		//creates and appends text
 h3.className = "msg";
 document.body.appendChild(h1);
 document.body.appendChild(h3);
@@ -511,38 +505,39 @@ document.body.appendChild(h3);
 var body = document.getElementsByTagName("body")[0];
 body.className = "container";
 
-  var tbl = document.createElement("table");
-  var tblBody = document.createElement("tbody");
-  tblBody.className = "tblBody";
 
-  for (var i = 1; i < 6; i++) {
-    var row = document.createElement("tr");
-    row.id = "row" + i;
+var tbl = document.createElement("table");
+var tblBody = document.createElement("tbody");		//gives classname to  the body of the playing field
+tblBody.className = "tblBody";
 
+for (var i = 1; i < 6; i++) {
+  var row = document.createElement("tr");			//creates the rows
+  row.id = "row" + i;
 
-    for (var j = 0; j < 5; j++) {
-      var cell = document.createElement("td");
-      cell.id = row.id + "c" + j;
-      row.appendChild(cell);
+  for (var j = 0; j < 5; j++) {
+   	  var cell = document.createElement("td");
+   	  cell.id = row.id + "c" + j;
+      row.appendChild(cell);				//creates the cells
       cell.style.width = "60px";
       cell.style.height = "60px";
     }
     tblBody.appendChild(row);
-  }
+}
 
-  tbl.appendChild(tblBody);
-  body.appendChild(tbl);
-  tbl.setAttribute("border", "1");
 
-document.getElementById("row1c0").innerHTML=word[0];
+tbl.appendChild(tblBody);
+body.appendChild(tbl);			//appends the playing field
+tbl.setAttribute("border", "1");
 
 var input = document.createElement("input");
 input.type = "text";
-input.className = "guess";
+input.className = "guess";				//creates input field
 input.setAttribute('placeholder', 'voer je antwoord in');
 body.appendChild(input); 
 
- input.onkeypress = function(event) {			//guess event
+document.getElementById("row1c0").innerHTML=word[0];
+
+ input.onkeypress = function(event) {						//guess event
     if (event.key == "Enter" || event.keyCode == 13) {
     	var guess = input.value.toUpperCase();
     	var guessArr = guess.split("");
@@ -550,41 +545,44 @@ body.appendChild(input);
     	var charsCopy = word;
     	console.log(guessArrCopy + " copy");
     	console.log(charsCopy + " copy");
+    	if (activeRow <5) {
+    		document.getElementById("row" + (activeRow+1) + "c0").innerHTML=word[0];		//shows every first letter
+    	}
     	for (var k = 0; k < guessArrCopy.length; k++) {
-    	    document.getElementById("row" + activeRow + "c" + k).innerHTML = guessArrCopy[k];
+    	    document.getElementById("row" + activeRow + "c" + k).innerHTML = guessArrCopy[k];		
     }
-    activeRow++;
-    
-	if (word == guess) {
-           alert("you won");
-           location.reload();
-    }
+    activeRow++
+    input.value = "";  //empties input field
 
-    else  if (activeRow > 5) {
-       	alert("Sorry, you lost." + "Correct word: " + word);
+	if (word == guess) {
+        alert("You Won");  //win situation
         location.reload();
     }
 
-	//check for colors and correct letters
-
- 
-for (var i = 0; i < 5; i++) {
-	document.getElementById("row" + (activeRow-1) + "c" + i).classList.add("red");
-	    if (charsCopy[i] == guessArrCopy[i]) {
-	        document.getElementById("row"+(activeRow-1)+"c" + i).style.backgroundColor = "green";
-	        charsCopy[i]= null;
-	        guessArrCopy[i] = null;
-	    }
+    else  if (activeRow > 5) { 
+       	alert("Sorry, you lost. " + "Correct word: " + word);	//lose situation
+        location.reload();
     }
-    for(i = 0; i < 5; i++){
+
+	for (var i = 0; i < 5; i++) {								//check for colors and correct letters
+		if (charsCopy[i] == guessArrCopy[i]) {
+			charsCopy[i]= null;
+		    guessArrCopy[i] = null;
+		    document.getElementById("row"+(activeRow-1)+"c" + i).style.backgroundColor = "green";
+		    
+		}
+	}
+
+	for(i = 0; i < 5; i++){
         if (guessArrCopy[i] != null) {
             var position = charsCopy.indexOf(guessArrCopy[i]);
+            document.getElementById("row"+(activeRow-1)+"c" + i).classList.add('red');
             if (position > -1) {
-                document.getElementById("row" + (activeRow-1) + "c" + i).classList.add('yellow');
+                document.getElementById("row"+(activeRow-1)+"c" + i).classList.add('yellow');
                 charsCopy[position] = null;
                 guessArrCopy[i] = null;
             }
         }
     }
-}
+ }
 }
