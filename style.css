@@ -2,7 +2,7 @@ body{
   width: 420px;
   margin: 0 auto;
   margin-top: 20px;
-  background-color: white;
+  background-image: url('./img/bg.jpg');
   
 }
 .tblBody{
